@@ -1,0 +1,902 @@
+{
+	"info": {
+		"_postman_id": "f39b7643-ea80-4515-8f21-96310b22933c",
+		"name": "Testing Folkatech API",
+		"description": "StartFragmentThis collection is provided for the Folkatech assessment as part of the job entry process",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42600034"
+	},
+	"item": [
+		{
+			"name": "Laporan terkirim",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response structure is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.equal(\"Data laporan berhasil dikirim.\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbGFwb3IuZm9sa2F0ZWNoLmNvbVwvYXBpXC9sb2dpbiIsImlhdCI6MTc0MDU0MDk1NSwiZXhwIjoxNzQwNTQ0NTU1LCJuYmYiOjE3NDA1NDA5NTUsImp0aSI6InJjQVpjMkpYcXhibHZObDEiLCJzdWIiOjgwOSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.C0I68WnsZ8yzqP6xUQcGMNELw_mCHJEQFcNvKAVmU48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "report_category_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "Tester",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "province_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tipe_korban",
+							"value": "php",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "lng",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "address_location",
+							"value": "Cimahi",
+							"type": "text"
+						},
+						{
+							"key": "userfile",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "urgency",
+							"value": "rendah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lapor.folkatech.com/api/report",
+					"protocol": "https",
+					"host": [
+						"lapor",
+						"folkatech",
+						"com"
+					],
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token tidak valid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response structure is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.equal(\"Unauthenticated\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wva3BwcGEuZm9sa2F0ZWNoLmNvbVwvYXBpXC9zb2NpYWwtbG9naW4iLCJpYXQiOjE2OTE1NTM1ODEsImV4cCI6MTY5MTU1NzE4MSwibmJmIjoxNjkxNTUzNTgxLCJqdGkiOiJyb05XSVFFaDRSbmxQTFdyIiwic3ViIjoxMCwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.o9wuLS2O75vx6cnONeIzWW3XQ9bvLGWRQDD4PFwhhqc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "lapor.folkatech.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "report_category_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "Rahmat",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "province_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tipe_korban",
+							"value": "php",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "lng",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "address_location",
+							"value": "Cimahi",
+							"type": "text"
+						},
+						{
+							"key": "userfile",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "urgency",
+							"value": "rendah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lapor.folkatech.com/api/report",
+					"protocol": "https",
+					"host": [
+						"lapor",
+						"folkatech",
+						"com"
+					],
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tanpa menggunakan token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response structure is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.equal(\"Unauthenticated\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "lapor.folkatech.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "report_category_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "Rahmat",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "province_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tipe_korban",
+							"value": "php",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "lng",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "address_location",
+							"value": "Cimahi",
+							"type": "text"
+						},
+						{
+							"key": "userfile",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "urgency",
+							"value": "rendah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lapor.folkatech.com/api/report",
+					"protocol": "https",
+					"host": [
+						"lapor",
+						"folkatech",
+						"com"
+					],
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Data tidak lengkap",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response structure is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.equal(\"Data kategori tidak ditemukan.\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbGFwb3IuZm9sa2F0ZWNoLmNvbVwvYXBpXC9sb2dpbiIsImlhdCI6MTc0MDU0MDk1NSwiZXhwIjoxNzQwNTQ0NTU1LCJuYmYiOjE3NDA1NDA5NTUsImp0aSI6InJjQVpjMkpYcXhibHZObDEiLCJzdWIiOjgwOSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.C0I68WnsZ8yzqP6xUQcGMNELw_mCHJEQFcNvKAVmU48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "lapor.folkatech.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fullname",
+							"value": "Rahmat",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "province_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tipe_korban",
+							"value": "php",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "lng",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "address_location",
+							"value": "Cimahi",
+							"type": "text"
+						},
+						{
+							"key": "userfile",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "urgency",
+							"value": "rendah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lapor.folkatech.com/api/report",
+					"protocol": "https",
+					"host": [
+						"lapor",
+						"folkatech",
+						"com"
+					],
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gagal Membuat laporan karena kesalahan method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is in HTML format\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/html\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains '405 Method Not Allowed' message\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"405 Method Not Allowed\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains error message\", function () {\r",
+							"    var responseText = pm.response.text();\r",
+							"    pm.expect(responseText).to.include(\"Oops! An Error Occurred\");\r",
+							"    pm.expect(responseText).to.include(\"The server returned a\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wva3BwcGEuZm9sa2F0ZWNoLmNvbVwvYXBpXC9zb2NpYWwtbG9naW4iLCJpYXQiOjE2OTE1NTM1ODEsImV4cCI6MTY5MTU1NzE4MSwibmJmIjoxNjkxNTUzNTgxLCJqdGkiOiJyb05XSVFFaDRSbmxQTFdyIiwic3ViIjoxMCwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.o9wuLS2O75vx6cnONeIzWW3XQ9bvLGWRQDD4PFwhhqc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "lapor.folkatech.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "report_category_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "Rahmat",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "province_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tipe_korban",
+							"value": "php",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "lng",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "address_location",
+							"value": "Cimahi",
+							"type": "text"
+						},
+						{
+							"key": "userfile",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "urgency",
+							"value": "rendah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lapor.folkatech.com/api/report",
+					"protocol": "https",
+					"host": [
+						"lapor",
+						"folkatech",
+						"com"
+					],
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gagal Membuat Laporan karena data tidak sesuai",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// ✅ Cek apakah response status 200 OK\r",
+							"pm.test(\"Response status is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response structure is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.equal(\"Data laporan berhasil dikirim.\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbGFwb3IuZm9sa2F0ZWNoLmNvbVwvYXBpXC9sb2dpbiIsImlhdCI6MTc0MDU0MDk1NSwiZXhwIjoxNzQwNTQ0NTU1LCJuYmYiOjE3NDA1NDA5NTUsImp0aSI6InJjQVpjMkpYcXhibHZObDEiLCJzdWIiOjgwOSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.C0I68WnsZ8yzqP6xUQcGMNELw_mCHJEQFcNvKAVmU48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "report_category_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "Tester",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "province_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tipe_korban",
+							"value": "php",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "lng",
+							"value": "abc",
+							"type": "text"
+						},
+						{
+							"key": "address_location",
+							"value": "Cimahi",
+							"type": "text"
+						},
+						{
+							"key": "userfile",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "urgency",
+							"value": "rendah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lapor.folkatech.com/api/report",
+					"protocol": "https",
+					"host": [
+						"lapor",
+						"folkatech",
+						"com"
+					],
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gagal Membuat laporan karena province_id tidak terdaftar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response structure is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status is true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.equal(\"Data provinsi tidak ditemukan.\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbGFwb3IuZm9sa2F0ZWNoLmNvbVwvYXBpXC9sb2dpbiIsImlhdCI6MTc0MDU0MDk1NSwiZXhwIjoxNzQwNTQ0NTU1LCJuYmYiOjE3NDA1NDA5NTUsImp0aSI6InJjQVpjMkpYcXhibHZObDEiLCJzdWIiOjgwOSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.C0I68WnsZ8yzqP6xUQcGMNELw_mCHJEQFcNvKAVmU48",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "report_category_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "Tester",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "province_id",
+							"value": "7",
+							"type": "text"
+						},
+						{
+							"key": "tipe_korban",
+							"value": "php",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "lng",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "address_location",
+							"value": "Cimahi",
+							"type": "text"
+						},
+						{
+							"key": "userfile",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "urgency",
+							"value": "rendah",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://lapor.folkatech.com/api/report",
+					"protocol": "https",
+					"host": [
+						"lapor",
+						"folkatech",
+						"com"
+					],
+					"path": [
+						"api",
+						"report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
