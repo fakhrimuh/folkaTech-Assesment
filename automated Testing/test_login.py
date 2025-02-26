@@ -125,13 +125,13 @@ class TestLogin(unittest.TestCase):
 
 def suite():
     test_suite = unittest.TestSuite()
-    # test_suite.addTest(TestLogin("test_valid_login"))  
-    # test_suite.addTest(TestLogin("test_login_empty_fields")) 
-    # test_suite.addTest(TestLogin("test_login_with_only_email"))
-    # test_suite.addTest(TestLogin("test_login_with_only_password"))
-    # test_suite.addTest(TestLogin("test_login_with_wrong_password"))
-    # test_suite.addTest(TestLogin("test_login_with_wrong_email"))
-    # test_suite.addTest(TestLogin("test_login_with_unregistered_account"))
+    test_suite.addTest(TestLogin("test_valid_login"))  
+    test_suite.addTest(TestLogin("test_login_empty_fields")) 
+    test_suite.addTest(TestLogin("test_login_with_only_email"))
+    test_suite.addTest(TestLogin("test_login_with_only_password"))
+    test_suite.addTest(TestLogin("test_login_with_wrong_password"))
+    test_suite.addTest(TestLogin("test_login_with_wrong_email"))
+    test_suite.addTest(TestLogin("test_login_with_unregistered_account"))
     test_suite.addTest(TestLogin("test_login_with_case_sensitive_password"))
 
     return test_suite
