@@ -8,16 +8,15 @@ class TestLogin(unittest.TestCase):
     def setUp(self):
         """Setup browser dengan mode incognito sebelum pengujian dimulai."""
         chrome_options = Options()
-        chrome_options.add_argument("--incognito")  # Mode penyamaran
+        chrome_options.add_argument("--incognito")
         self.driver = webdriver.Chrome(options=chrome_options)
-        self.driver.get("https://lapor.folkatech.com/")  # Ganti dengan URL login yang diuji
+        self.driver.get("https://lapor.folkatech.com/")
 
     def test_valid_login(self):
         print('Running Test Login Valid')
         login_page = LoginPage(self.driver)
         login_page.login("admin@example.com", "password")
 
-        # Verifikasi apakah login berhasil dengan mengecek URL dashboard
         self.assertIn("dashboard", self.driver.current_url)
 
     def test_login_empty_fields(self):
@@ -25,10 +24,8 @@ class TestLogin(unittest.TestCase):
         login_page = LoginPage(self.driver)
         login_page.login("","")
 
-        # Ambil pesan error dari halaman
         error_messages = login_page.get_error_messages()
         
-        # Harus sesuai dengan UI (pesan pertama tanpa *, lainnya pakai *)
         expected_errors = [
             "Email harus diisi.",
             "* Email harus diisi.",
